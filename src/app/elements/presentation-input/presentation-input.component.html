@@ -1,0 +1,32 @@
+<div class="presentation">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group form-inline pull-right">
+        <label>Theme: &nbsp; </label>
+        <p-dropdown class="form-control" [options]="themeList" (onChange)="onThemeChange($event.value)" [(ngModel)]="selectedTheme" placeholder="-- Select --" required></p-dropdown>      
+      </div>
+    </div>
+  </div>
+  <div [ngClass]="selectedTheme ? selectedTheme : 'default'">
+    <div class="reveal"  #sliderWrapElement>
+      <div class="slides" #sliderElement [ngStyle]="{'zoom':zoomvalue,'width':screenMainWidth,'height':screenMainHeight}">
+      </div>
+      <!-- <div id="editor" class="visually-hidden">
+          <div></div>
+        </div>
+        <div class="progress"><span></span></div> -->
+      <div data-direction="right" (click)="addNewSlide()" class="add-slide add-slide--right js-handler--add-slide-right noselect">+</div>
+      <div data-direction="bottom" *ngIf="(totalSectionCount-1) != 0" (click)="deleteSlide()" class="add-slide add-slide--bottom js-handler--add-slide-down noselect">-</div>
+    </div>
+  </div>
+  <div *ngIf="!showTextEditor" class="left-right-btn">
+      <button (click)="slideLeft()" class="btn" [ngClass]="{'active': currentPostionIndex > 0}"><i class="fa fa-caret-left" aria-hidden="true"></i>
+      </button>
+      <button (click)="slideRight()" class="btn" [ngClass]="{'active': currentPostionIndex < (totalSectionCount-1)}"><i class="fa fa-caret-right" aria-hidden="true"></i>
+      </button>
+  </div>
+  <div *ngIf="showTextEditor">
+    <app-text-editor [(ngModel)]="internalContent" (forceSave)="onForceSave()"></app-text-editor>
+    <button class="btn" (click)="changeContentDone()">Done</button>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="editor-tools-panel"
+     [style.left]="toolbarPosition['x'] + 'px'"
+     [style.top]="toolbarPosition['y'] + 'px'"
+>
+
+  <div class="font-tools tool-item" *ngIf="tool === 'font'">
+    <div class="font-size">
+      <span *ngIf="!editingSize" (click)="editSize()">{{editingStyle['fontSize']}}px</span>
+      <input type="text"
+             id="edit-size"
+             maxlength="2"
+             name="fontSize"
+             *ngIf="editingSize"
+             [(ngModel)]="editingStyle['fontSize']"
+             (blur)="editingSize = !editingSize; styleChanged.emit(editingStyle)"
+             (keypress)="validateSize($event)"
+             (keyup.enter)="changeSize($event)"
+      >
+    </div>
+    <!--<div class="font-family">Arial</div>-->
+    <div class="text-alignment">
+      <i class="fa fa-align-center"
+         [class.active]="editingStyle['right'] === 'center'"
+         (click)="editingStyle['right'] = 'center'; styleChanged.emit(editingStyle)"
+      ></i>
+      <i class="fa fa-align-left"
+         [class.active]="editingStyle['right'] === 'left'"
+         (click)="editingStyle['right'] = 'left'; styleChanged.emit(editingStyle)"
+      ></i>
+      <i class="fa fa-align-right"
+         [class.active]="editingStyle['right'] === 'right'"
+         (click)="editingStyle['right'] = 'right'; styleChanged.emit(editingStyle)"
+      ></i>
+    </div>
+    <div class="color"
+         [class.transparent]="editingStyle['fontColor'] === 'transparent'"
+         (click)="openColorPicker('fontColor')"
+         [style.backgroundColor]="editingStyle['fontColor']"
+    ></div>
+  </div>
+
+  <div class="figure-tool tool-item" *ngIf="tool === 'figure'">
+    <div class="border">
+      Border
+      <div class="color"
+           [class.transparent]="editingStyle['strokeColor'] === 'transparent'"
+           (click)="openColorPicker('strokeColor')"
+           [style.backgroundColor]="editingStyle['strokeColor']"
+      ></div>
+      <div class="border-width">
+        <span *ngIf="!editingSize" (click)="editSize()">{{editingStyle['strokeWidth']}}px</span>
+        <input type="text"
+               id="edit-size"
+               maxlength="2"
+               name="strokeWidth"
+               *ngIf="editingSize"
+               [(ngModel)]="editingStyle['strokeWidth']"
+               (blur)="editingSize = !editingSize; styleChanged.emit(editingStyle)"
+               (keypress)="validateSize($event)"
+               (keyup.enter)="changeSize($event)"
+        >
+      </div>
+      <div class="border-style" (click)="changeBorderStyle()">
+        <span *ngIf="editingStyle['dashed'] === '0'">Solid</span>
+        <span *ngIf="editingStyle['dashed'] === '1'">Dashed</span>
+      </div>
+    </div>
+
+    <div class="fill">
+      Fill
+      <div class="color"
+           [class.transparent]="editingStyle['fillColor'] === 'transparent'"
+           (click)="openColorPicker('fillColor')"
+           [style.backgroundColor]="editingStyle['fillColor']"
+      ></div>
+    </div>
+  </div>
+
+  <div class="color-picker" *ngIf="tool === 'color'">
+    <div class="colors">
+      <div *ngFor="let color of colors"
+           class="color"
+           [class.transparent]="color.name === 'transparent'"
+           [style.backgroundColor]="color.hex"
+           (click)="getSelectedColor(color)"
+      ></div>
+    </div>
+    <div class="close" (click)="tool = prevTool"></div>
+  </div>
+</div>

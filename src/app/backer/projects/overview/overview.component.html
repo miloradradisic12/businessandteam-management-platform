@@ -1,0 +1,74 @@
+<div class="container-fluid backer">
+    <div class="container-main">
+        <div class="container-border">
+            <app-navbar></app-navbar>
+            <div class="projects-container">
+                <div class="projects-header">
+                    <div class="project-header-text">
+                        <span class="projects-header-caption">Projects</span>
+
+                    </div>
+                    <div class="projects-filter">
+                        <span class="projects-filter-caption">Filter by stage</span>
+                        <p-dropdown class="form-control" [options]="projectType" [(ngModel)]="stage"></p-dropdown>
+                        <!-- <select class="form-control" [(ngModel)]="stage">
+              <option value="">All</option>
+              <option value="idea">Idea</option>
+              <option value="startup">Startup</option>
+            </select> -->
+                    </div>
+                </div>
+                <div class="projects-search">
+                    <div class="search-icon"></div>
+                    <input class="form-control" type="text" placeholder="Start typing to search projects" [(ngModel)]="searchText" />
+                </div>
+                <table class="table table-hover projects-table">
+                    <tbody>
+                        <tr *ngFor="let project of (projects | filterProjectStage:stage | searchProject:searchText)">
+                            <td>
+                                <div class="project-title">
+                                    <div class="project-icon">{{project.title[0]}}</div>
+                                    <div class="project-name">{{project.title}}</div>
+                                    <div class="project-stock">(12 <span class="icon-next-1"></span>)</div>
+                                    <!-- <div class="project-stock stock-down">(235  <span class="icon-scroll-arrow-to-down"></span>)</div>  -->
+                                </div>
+                            </td>
+                            <td>
+                                <div class="project-stage">
+                                    <div class="project-stage-caption">{{projectStages[project.stage]}}</div>
+                                    <div class="project-stage-progress-bar">
+                                        <div class="project-stage-completed" [style.width.%]="project.progress">
+                                            {{project.progress}}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="project-description">
+                                    <span [ngbTooltip]="description">{{ (description.length>150)? (description | slice:0:150)+'...':(description) }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="project-actions">
+                                    <div class="btn-border message-btn">
+                                        <div class="btn message-btn">Message</div>
+                                    </div>
+                                    <div class="btn-border operations-btn" (click)="selectfunding(project)">
+                                        <div class="btn">Fund</div>
+                                    </div>
+                                    <div class="btn-border inside-btn" (click)="navigateTo(project)">
+                                        <div class="btn">Inside</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <app-pagination [pageSize]="pageSize" [pagesQuantity]="count" (pageChanged)="getNewProjectList($event)"></app-pagination>
+            </div>
+            <div class="projects-footer">
+                <div class="back-button" (click)="_location.back()">Back</div>
+            </div>
+        </div>
+    </div>
+</div>

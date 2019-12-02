@@ -1,0 +1,68 @@
+<div class="hire_employees">
+
+
+    <div class="projects-search">
+        <div class="search-icon"></div>
+        <input class="form-control" type="text" placeholder="Start typing to search" (input)="valueChange()" />
+
+        <!-- <div class="width220">
+            Records per page
+            <div class="pull-right recordTop">
+                <p-dropdown class="form-control" name="roles" [options]="transactionCount"></p-dropdown>
+       
+            </div>
+            <div class="clearfix"></div>
+        </div> -->
+
+    </div>
+
+    <div class=" table-responsive">
+        <table class="table table-hover projects-table transaction-table">
+            <thead>
+                <tr>
+                    <th>Added on</th>
+                    <th>Mode</th>
+                    <th>Entity Name</th>
+                    <th>Quantity</th>
+                    <th>Share/Price</th>
+                    <th>Amount Involved</th>
+                    <th>Due On</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>20th April 2018 <br> 02:21 PM</td>
+                    <td>Buy</td>
+                    <td>Creatrix LLC</td>
+                    <td>4 Shares (Cr)</td>
+                    <td>$250</td>
+                    <td>-$1000</td>
+                    <td>12th May 2018
+                        <span class="block">12:00 PM</span> </td>
+                </tr>
+                <tr>
+                    <td>26th April 2018 <br> 03:00 AM</td>
+                    <td>Sell</td>
+                    <td>Neha Creations Pvt. Ltd</td>
+                    <td>14 Shares (Cr)</td>
+                    <td>$200</td>
+                    <td>+$2800</td>
+                    <td>26th April 2018
+                        <span class="block">10:00 PM</span> </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- <app-pagination class="my-pagination" [pageReset]="paginationReset" [pageSize]="pageSize" [pagesQuantity]="count" (pageChanged)="getNewProjectList($event)"></app-pagination> -->
+    <app-pagination class="my-pagination" [pageSize]="pageSize" [pagesQuantity]="count" (pageChanged)="getNewEmpoloyeeList($event)"></app-pagination>
+    <!-- <div class="note">
+    Reference No's. are usually obtained in the response of Gateway API.
+    Details are also subject to the conditions for an example IFT/0232/3SDS could be an example. if amount is withdrawn, target account no will be mentioned. In case of deposit, the account from which the deposit has been done will be shown. In cases, when the details are not there NA will appear there.
+</div> -->
+
+</div>

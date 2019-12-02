@@ -1,0 +1,63 @@
+
+    
+<div class="cardwrap">
+ 
+    <div class="heading">
+        <div class="personimg">
+          <div class="profileimgwrap">          
+          <img *ngIf="userThreadInfoList[0].owner?.photo_crop && userThreadInfoList[0].owner?.photo_crop != null; else showTitle"
+            [src]="userThreadInfoList[0].owner?.photo_crop" alt="">
+        
+        <ng-template #showTitle>
+          <div class="project-title">
+            <div class="project-icon" *ngIf="userThreadInfoList[0].owner?.first_name">{{userThreadInfoList[0].owner?.first_name[0]}}</div>
+          </div>       
+        </ng-template>
+      </div>
+      </div>
+      <div class="persondetails">
+        <h4>{{userThreadInfoList[0].owner?.first_name}} {{userThreadInfoList[0].owner?.last_name}}</h4>
+        <div class="address">
+          {{userThreadInfoList[0].owner?.address}}
+        </div>
+        <div class="contactbox">
+            <span class="icon-talk"></span>
+            <span class="icon-phone-receiver"></span>
+            <span class="icon-video"></span>
+        </div>
+      </div>
+    </div>
+    <div class="cardbody">
+
+        <div class="media" *ngFor="let item of userThreadInfoList">
+            <div class="media-left">
+              <div class="mediaimg">
+                <img class="mr-3" *ngIf="item?.image && item?.image != null" [src]="item?.image">
+              </div>
+            </div>
+    
+            <div class="media-body">
+              <h5 class="mt-0" class="cursor"  (click)="selectedThreadId(item.id)">{{item?.title}}</h5>
+              <div class="action-time">{{item?.created_date | formatRelativeTime}}</div>
+              <div [innerHTML]="item?.description"></div>
+    
+              <!-- <div class="reply-items" *ngIf="item?.comment_thread">
+                <div class="media mt-3" *ngFor="let subItem of item.comment_thread">
+                  <a class="pr-3" href="#">
+                    <img [src]="subItem?.comment_by?.photo_crop">
+                  </a>
+                  <div class="media-body">
+                    <h5 class="mt-0">Media heading</h5>
+                    <div [innerHTML]="subItem?.text"></div>
+                  </div>
+                </div>
+              </div> -->
+    
+            </div>
+            <div class="postcounts"><span class="cursor" (click)="selectedThreadId(item.id)">See Posts <span class="icon-media-play-symbol"></span></span></div>
+          </div>
+
+
+
+</div>
+</div>

@@ -1,0 +1,6 @@
+main { height: 100%; }
+app-chat-room { height:calc(100% - 67px); display: block;}
+
+@media only screen and (max-width: 600px) {
+    app-chat-room  {  height: calc(100% - 60px); }
+  }

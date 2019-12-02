@@ -1,0 +1,120 @@
+<!-- <app-header [backNavOptions]="{caption: project.title, route: ['founder', 'projects', project.id]}"></app-header> -->
+<!-- <app-header [backNavOptions]="{caption: project.title, route: ['employee']}"></app-header> -->
+<app-header [backNavOptions]="{caption: 'My Proposals', route: ['employee', 'account', 'my-proposals']}"></app-header>
+
+<main>
+    <div class="container recruitment-wrap saf_blue_theme" id="recruitment-wrap">
+        <div class="heading">
+            <h1>Appointment Letter</h1>
+        </div>
+        <div class="cardwrap">
+            <div class="appointmentletter">
+                <!-- <div class="conpanyinfo">
+                    <div class="companylogo">
+                        <img src="./assets/img/company-logo.jpg">
+                    </div>
+                    <div class="companyname">
+                        <h1>COMPANY NAME</h1>
+                        <span>your slogan or tag line</span>
+                    </div>
+                </div>
+
+                <div class="appointment-head">
+                    January 10, 2018
+                    <br>
+                    <br> TO,
+
+                    <br> {{appointmentData?.name}}
+                    <br> {{appointmentData?.address}} ,
+                    <br> {{appointmentData?.state}}, {{appointmentData?.city}}, {{appointmentData?.zip}}
+
+
+                </div>
+                <div class="appointmentheading">
+                    Appointment Letter
+                </div>
+                <div class="appointmentbody">
+
+                    <p>Dear, {{appointmentData?.name}}</p>
+                    <p>Thank you for agreeing to serve as the ({{appointmentData?.working_title}}) for the ({{appointmentData?.department}}).
+                        This administrative appointment is your secondary appointment and is on an “at-will” basis, for {{appointmentData?.duration}}
+                        position, beginning {{appointmentData?.beginningDate | date: 'MMMM dd, yyyy'}} </p>
+
+                    <p>Your performance and responsibilities will be reviewed periodically according to established university
+                        requirements and college/department evaluation criteria. </p>
+
+                    <p>As compensation for your responsibilities as the ({{appointmentData?.working_title}}), you will receive
+                        ${{appointmentData?.salaryParameters}}/hr . for agreed association of ({{appointmentData?.availability}})
+                        hrs/day working span.
+                        
+                    </p>
+
+                    <p>Your duties and responsibilities as the ({{appointmentData?.working_title}}) include:</p>
+                    <ol>
+                        <li>{{appointmentData?.responsibilities1}}</li>
+                        <li>{{appointmentData?.responsibilities2}}</li>
+                        <li>{{appointmentData?.responsibilities3}}</li>
+                    </ol>
+
+
+                    <p>This letter constitutes the full terms of your assignment as the ({{appointmentData?.working_title}})
+                        and supersedes all other offers, either written or verbal, that may have been made to you. Should
+                        you have questions concerning this administrative assignment, please contact me.</p>
+
+                </div>
+                <div class="appointmentfooter">
+                    <p>Regards,</p>
+
+
+
+                </div>
+                <div class="signacceptance mb-10">
+                    <div class="signbox"></div>
+                    Sign here to accept offer
+                </div> -->
+
+                <app-docu-signdocpreview [URL]="docuSignUrl"></app-docu-signdocpreview>
+
+                <div *ngIf="showNda && appointmentData?.status != 'accept'">
+                    <div class="">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" required [(ngModel)]="ndaChecked" #ndaCheckbox="ngModel">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description"> I accept
+                                <a href="javascript:void(0);" (click)="openNdaModal(content)">Terms of Use</a>
+                            </span>
+                        </label>
+                    </div>
+                    <p class="errorwrap" *ngIf="ndaCheckbox.invalid && ndaCheckbox.touched">
+                        Please check Terms of Use
+                    </p>
+                </div>
+
+                <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Terms of Use</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" [innerHTML]="ndaContent">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                    </div>
+                </ng-template>
+
+                <div class="post-buttons" *ngIf="appointmentData?.status != 'accept'">
+                    <button class="button skyblue" *ngIf="!isApply && !isNone; else myAppointment" [disabled]="(showNda && !ndaChecked)" (click)="putRecuiterReqAppointment()">Accept</button>
+                    <ng-template #myAppointment>
+                        <button *ngIf="isApply && !isNone; else myDirectAppointment" class="button skyblue" [disabled]="(showNda && !ndaChecked)"
+                            (click)="putAppliedAppointment()">Accept</button>
+                        <ng-template #myDirectAppointment>
+                            <button class="button skyblue" (click)="putDirectAppointment()" [disabled]="(showNda && !ndaChecked)">Accept</button>
+                        </ng-template>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

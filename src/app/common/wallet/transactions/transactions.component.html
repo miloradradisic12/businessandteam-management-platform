@@ -1,0 +1,73 @@
+<app-header></app-header>
+<main>
+  <div class="container saf_blue_theme">
+    <div class="heading">
+      <h1>Transactions</h1>
+    </div>
+    <div class="cardwrap transitionWrap">
+
+      <div class="pull-left fundWrap">
+        <h5>
+          <div class="fundBtn pull-left">
+            <button type="text" class="btn skyblue">
+              <span class="icomoon icon-coins"></span>
+            </button>
+          </div>
+          {{walletAmmount}} Dab Coins
+          <span class="dabcoin">(Ex. 1 Dabcoin is equal to 1 USD) </span>
+        </h5>
+      </div>
+      <div class="pull-right" *ngIf="!is_fund">
+        <ul class="fundList">
+          <li class="fundWrap">
+            <a href="javascript:void(0);" (click)="selectedFundType('deposite')">
+              <div class="fundBtn pull-left">
+                <button type="text" class="btn purple">
+                  <span class="icomoon icon-wallet"></span>
+                </button>
+              </div>
+              Deposit Funds </a>
+          </li>
+          <li class="fundWrap">
+            <a href="javascript:void(0);" (click)="selectedFundType('withdrawal')">
+              <div class="fundBtn pull-left">
+                <button type="text" class="btn orange">
+                  <span class="icomoon icon-withdraw"></span>
+                </button>
+              </div>
+              Withdraw Fund </a>
+          </li>
+        </ul>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="cardwrap tabwrap">
+
+      <ngb-tabset *ngIf="!is_fund">
+        <ngb-tab>
+          <ng-template ngbTabTitle>Pending Transactions</ng-template>
+          <ng-template ngbTabContent>
+            <app-pending-transactions></app-pending-transactions>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+          <ng-template ngbTabTitle>Completed Transactions</ng-template>
+          <ng-template ngbTabContent>
+            <app-completed-transactions></app-completed-transactions>
+          </ng-template>
+        </ngb-tab>
+
+      </ngb-tabset>
+      <div *ngIf="is_fund">
+        <app-deposit-withdraw-fund [selectedType]="selectedType" (completedTransaction)="getTransactionList($event)"></app-deposit-withdraw-fund>
+      </div>
+    </div>
+
+    <div class="projects-footer" *ngIf="!is_fund">
+      <div class="back-button" (click)="_location.back()">Back</div>
+    </div>
+    <div class="projects-footer" *ngIf="is_fund">
+      <div class="back-button" (click)="is_fund = !is_fund">Back</div>
+    </div>
+  </div>
+</main>

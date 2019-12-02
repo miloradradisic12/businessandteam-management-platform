@@ -1,0 +1,45 @@
+<app-header [backNavOptions]="{caption: project.title, route: ['founder', 'projects', project.id]}"></app-header>
+<main>
+  <div class="container saf_blue_theme">
+    <div class="heading">
+      <h1>Budget</h1>
+    </div>
+
+    <div class="cardwrap">
+      <div class="card">
+        <h2>My Expenses</h2>
+        <div class="progress bg-voilet">
+          <div class="progress-bar bg-danger" style="width:60%">
+          </div>
+        </div>
+        <div class="valuewrap">
+          <span class="value" style="left:60%">$60,000</span>
+          <span class="totalvalue">$100,000</span>
+        </div>
+        <div class="btn_wrap">
+          <button class="saffron_btn skyblue_btn" [routerLink]="['./payment']">Payment</button>
+          <button class="saffron_btn blue_btn" [routerLink]="['./materialcost']">Material Cost</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>My Fund</h2>
+        <div class="progress bg-lightvoilet">
+          <div class="progress-bar bg-voilet" style="width:20%">
+          </div>
+        </div>
+        <div class="valuewrap">
+          <span class="value" style="left:20%">$20,000</span>
+          <span class="totalvalue">$100,000</span>
+        </div>
+        <div class="btn_wrap">
+          <!-- <button class="saffron_btn blue_btn" [routerLink]="['./managelsx']">Manage LSX</button> -->
+          <button class="saffron_btn skyblue_btn" [routerLink]="['./viewlaunch']">View ISX/LSX</button>
+          <button class="saffron_btn orange_btn" [routerLink]="['./viewmanagefund']">View Funding</button>
+        </div>
+      </div>
+    </div>
+    <div class="projects-footer">
+      <div class="back-button" (click)="_location.back()">Back</div>
+    </div>
+  </div>
+</main>

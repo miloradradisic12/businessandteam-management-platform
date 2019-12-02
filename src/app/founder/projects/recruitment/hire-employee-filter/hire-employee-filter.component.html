@@ -1,0 +1,95 @@
+<ng-container> 
+   <ngb-accordion #acc="ngbAccordion"  [closeOthers]="true" activeIds="ngb-panel-0">    
+       <ngb-panel id="1">
+         <ng-template ngbPanelTitle>
+           <span (click)="getDepartments()">Department</span>
+           <!-- <button (click)="getDepartments()">Department</button> -->
+         </ng-template>
+         <ng-template ngbPanelContent>
+            <label *ngFor="let c of departments" class="custom-control custom-checkbox">
+                 <input id="{{c.id}}" #checkboxID name="departments" type="radio" 
+                 value="{{c.id}}" class="custom-control-input"
+                 [checked]="c.checkedDeptItem" (change)="onDepartmentChecked(checkboxID.checked,checkboxID.value)">
+                  <span class="custom-control-indicator"></span>
+                 <span class="custom-control-description">{{c.title}}</span>
+               </label>
+         </ng-template>
+       </ngb-panel>
+ 
+       <ngb-panel [disabled]="flagRoles">
+           <ng-template ngbPanelTitle>
+             <span (click)="getRole()">Role</span>
+           </ng-template>
+           <ng-template ngbPanelContent>            
+                 <label *ngFor="let c of roles" class="custom-control custom-checkbox">
+                   <input id="{{c.id}}" #roleCheckbox name="roles" type="radio" 
+                   value="{{c.id}}" class="custom-control-input"
+                   [checked]="c.checkedRoleItem" (change)="onRoleChecked(roleCheckbox.checked,roleCheckbox.value)">
+                    <span class="custom-control-indicator"></span>
+                   <span class="custom-control-description">{{c.title}}</span>
+                 </label>
+           </ng-template>
+         </ngb-panel>
+ 
+         <ngb-panel [disabled]="flagExpertise">
+             <ng-template ngbPanelTitle>
+               <span  (click)="getExperties()">Experties</span>
+             </ng-template>
+             <ng-template ngbPanelContent>                
+                   <label *ngFor="let c of expertise" class="custom-control custom-checkbox">
+                     <input id="{{c.id}}" #expertiseCheckbox name="expertise" type="checkbox" 
+                     value="{{c.id}}" class="custom-control-input"
+                     [checked]="c.checkedExpertiseItem" (change)="onExpertiseChecked(expertiseCheckbox.checked,expertiseCheckbox.value)">
+                      <span class="custom-control-indicator"></span>
+                     <span class="custom-control-description">{{c.title}}</span>
+                   </label>
+             </ng-template>
+           </ngb-panel>
+ 
+           <ngb-panel>
+               <ng-template ngbPanelTitle>
+                 <span (click)="getAvailability()">Availability</span>
+               </ng-template>
+               <ng-template ngbPanelContent>
+                  
+                     <label *ngFor="let c of availability" class="custom-control custom-checkbox">
+                       <input id="{{c.id}}" #availabilityCheckbox name="availability" type="radio" 
+                       value="{{c.id}}" class="custom-control-input"
+                       [checked]="c.checkedAvalItem" (change)="onAvailabilityChecked(availabilityCheckbox.checked,availabilityCheckbox.value)">
+                        <span class="custom-control-indicator"></span>
+                       <span class="custom-control-description">{{c.title}}</span>
+                     </label>
+               </ng-template>
+             </ngb-panel>
+ 
+             <ngb-panel>
+                 <ng-template ngbPanelTitle>
+                   <span (click)="getexperience()">Experience</span>
+                 </ng-template>
+                 <ng-template ngbPanelContent>                    
+                       <label *ngFor="let c of experience" class="custom-control custom-checkbox">
+                         <input id="{{c.id}}" #experienceCheckbox name="experience" type="radio" 
+                         value="{{c.id}}" class="custom-control-input"
+                         [checked]="c.checkedExperienceItem" (change)="onExperienceChecked(experienceCheckbox.checked,experienceCheckbox.value)">
+                          <span class="custom-control-indicator"></span>
+                         <span class="custom-control-description">{{c.title}}</span>
+                       </label>
+                 </ng-template>
+               </ngb-panel>
+ 
+               <ngb-panel>
+                   <ng-template ngbPanelTitle>
+                     <span (click)="getHourlyBudget()">Hourly Budget</span>
+                   </ng-template>
+                   <ng-template ngbPanelContent>                      
+                         <label *ngFor="let c of hourlyBudget" class="custom-control custom-checkbox">
+                           <input id="{{c.id}}" #hourlyBudgetCheckbox name="hourlyBudget" type="radio" 
+                           value="{{c.id}}" class="custom-control-input"
+                           [checked]="c.checkedBudgetItem" (change)="onHourlyBudgetChecked(hourlyBudgetCheckbox.checked,hourlyBudgetCheckbox.value)">
+                            <span class="custom-control-indicator"></span>
+                           <span class="custom-control-description">{{c.title}}</span>
+                         </label>
+                   </ng-template>
+                 </ngb-panel>
+     </ngb-accordion>
+   </ng-container>

@@ -1,0 +1,36 @@
+<app-header></app-header>
+<main>
+  <div class="container saf_blue_theme">
+    <div class="heading">
+      <h1>My Shares</h1>
+    </div>
+   
+    <div class="cardwrap tabwrap">      
+      <!-- <div class="mysharebtn form-group">
+            <p-dropdown class="form-control"  optionLabel="name"></p-dropdown>
+
+        
+      </div> -->
+      <ngb-tabset>
+          <ngb-tab>
+             <ng-template ngbTabTitle>My Funded Project</ng-template>
+             <ng-template ngbTabContent>
+              <app-my-funded-projects></app-my-funded-projects>         
+             </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>Similar Project</ng-template>
+            <ng-template ngbTabContent>
+              <app-similar-projects></app-similar-projects>
+            </ng-template>
+          </ngb-tab> 
+      </ngb-tabset>
+
+      </div>
+
+    <div class="projects-footer">
+      <div class="back-button" (click)="_location.back()">Back</div>
+    </div>
+
+  </div>
+</main>

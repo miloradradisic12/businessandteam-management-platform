@@ -1,0 +1,99 @@
+<app-header [backNavOptions]="{caption: 'Project List', route: ['employee', 'account', 'project-list']}"></app-header>
+
+<main>
+  <aside class="processes"
+         [class.open]="isProcessesOpen"
+         [class.mobile_open]="activeMobileView === 'menu'"
+  >
+    <span class="open_trigger" (click)="isProcessesOpen = !isProcessesOpen"><i class="icomoon icon-menu2"></i></span>
+    <div class="processes-scroll" *ngIf="isProcessesOpen">
+
+      <ul *ngFor="let milestone of milestones">
+        <li>
+          <span class="milestone">
+            <span class="clip">{{milestone.title}}</span>
+            <i class="fa fa-caret-down"></i>
+          </span>
+
+          <ul class="goals">
+            <li *ngFor="let task of milestone.tasks;">
+              <span
+                (click)="openGoal(task)"
+                [attr.aria-expanded]="isCollapsed"
+                [class.active]="task.isCollapsed"
+                [class.selected]="isGoalSelected(task)"
+              >
+                {{task.title}}
+                <i
+                  class="fa"
+                  [class.fa-angle-left]="!task.isCollapsed"
+                  [class.fa-angle-up]="task.isCollapsed"
+                ></i>
+              </span>
+
+              <ul class="channels" [ngbCollapse]="!task.isCollapsed" *ngIf="task.subtasks.length">
+                <li *ngFor="let channel of task.subtasks">
+                  <span
+                    [class.active]="channel.id === activeProcessId"
+                    (click)="openProcess(channel)"
+                  >#{{channel.title}}</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="public_channels" *ngIf="isProcessesOpen">
+        <h3>
+          Public Channels
+          <a href="#" (click)="$event.preventDefault()">+</a>
+        </h3>
+
+        <ul>
+          <li><span>#questions</span></li>
+          <li><span>#ideas</span></li>
+        </ul>
+
+        <h3>
+          Lunchroom
+          <a href="#" (click)="$event.preventDefault()">+</a>
+        </h3>
+
+        <ul>
+          <li><span>#questions</span></li>
+          <li><span>#ideas</span></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <div class="file-browser-container">
+    <div class="process">
+      <div class="process-header">
+        <div class="processes-trigger" (click)="activeMobileView = activeMobileView ? null : 'menu'">
+          <i class="fa fa-list-ul"></i>
+        </div>
+        <app-folder-select class="folder-select"></app-folder-select>
+        <div class="right-toolbar processes-trigger">
+          <div #rightToolbar></div>
+        </div>
+        <div *ngIf="selectedProcess"
+             class="processes-trigger"
+             (click)="activeMobileView = activeMobileView === 'details' ? null : 'details'; openChat()"
+        >
+          <img src="/assets/img/document-explorer/details.svg" width="24" height="24" alt="">
+        </div>
+        <div *ngIf="selectedProcess"
+             class="processes-trigger"
+             (click)="activeMobileView = activeMobileView === 'chat' ? null : 'chat'; openChat()"
+        >
+          <img src="/assets/img/document-explorer/chat.svg" width="26" height="24" alt="">
+        </div>
+      </div>
+      <router-outlet name="documents"></router-outlet>
+    </div>
+  </div>
+
+  <router-outlet name="chat"></router-outlet>
+</main>

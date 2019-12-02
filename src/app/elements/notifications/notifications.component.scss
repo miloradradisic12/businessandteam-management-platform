@@ -1,0 +1,46 @@
+.saffron_btn {
+    font-size: 1.125em;
+    padding: 0.167em 1em;
+}
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  
+    h1 {
+      color: #2929e4;
+      font-size: 2.250em;
+      font-weight: 500;
+      line-height: 1.194em;
+      margin: 2px;
+    }
+  
+    
+  }
+main {
+    padding:0 0 1.75em 0;
+    background-color: #f9f5f0;
+    min-height:100%;
+}
+.cardwrap {
+  
+    padding: 0;
+    margin-bottom: 1.875em;
+}
+.card                   { flex-direction: row; padding: 2.000em 2.500em 2.000em 0; border: 0; margin-bottom: 1.667em;   background: #fff; font-size: 0.750em; }
+.notification_icon      {  width: 2.917em; text-align: center; font-size: 2.000em; color:#7b79e8; line-height: normal; }
+.notification           {  font-size: 1.500em; color:#2b29ad; width:calc(100% - 12.222em); 
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    padding-right: 1.556em;
+    word-break: break-all;
+}
+.timestamp              { font-size: 1.333em; color: #666666; width: 9.375em; }
+@media (max-width:575px){
+    .card { flex-wrap: wrap;}
+    .notification { width: calc(100% - 3.889em); padding-right: 0; }
+    .timestamp { width: 100%;text-align: right; }
+}

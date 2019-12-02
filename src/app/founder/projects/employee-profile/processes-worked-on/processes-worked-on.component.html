@@ -1,0 +1,84 @@
+<app-header [backNavOptions]="{caption: project.title, route: ['founder', 'projects', project.id]}">
+</app-header>
+
+<main>
+
+  <div class="container saf_blue_theme">
+    <div class="profile-imgwrap">
+      <div class="profilebox">
+        <div class="profile-img">
+          <!-- <img src="/assets/img/profile.jpg"> -->
+          <img *ngIf="metricesModel.basicInfo?.photo" [src]="metricesModel.basicInfo?.photo" alt="">
+        </div>
+        <div class="profilename">{{metricesModel.basicInfo?.employee}}</div>
+        <div class="profilepost">( {{metricesModel.basicInfo?.current_designation}} ) </div>
+        <div class="starrate">
+          <ngb-rating [rate]="metricesModel.basicInfo?.rating"></ngb-rating>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="processesworked">
+      <h3>Processes worked on </h3>
+
+      <!-- <div class="projects-search">
+        <div class="search-icon"></div>
+        <input class="form-control" type="text" placeholder="Start typing to search processes worked on " [(ngModel)]="searchText"
+          (input)="valueChange()" />
+      </div> -->
+
+      <div class="hashtags" *ngIf="metricesModel.basicInfo.processes && metricesModel.basicInfo.processes.length > 0">
+        <button class="btn btn-link" *ngFor="let process of metricesModel.basicInfo.processes" [ngClass]="{'active' : process.process_id == selectedProcessId}"
+          (click)="getProcessSelected(process.process_id)">#{{process.title}} </button>
+      </div>
+    </div>
+    <div class="worktable boxtable">
+      <h3>Marketing work log</h3>
+      <div class="table-responsive">
+
+        <table class="table">
+          <thead>
+
+            <tr>
+              <!-- <th>Date</th> -->
+              <th>Start Date </th>
+              <th>End Date </th>
+              <th>Work hours</th>
+              <!-- <th>Work log</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let processItem of metricesModel?.ProcessListInfo?.results">
+              <!-- <td>Mon, June 21 - 2017 </td> -->
+              <td>{{processItem.start_datetime}}</td>
+              <td>{{processItem.end_datetime}}</td>
+              <td class="text-organge">{{processItem.loggedin_hours | slice:0:5}} hr</td>
+              <!-- <td>
+                <div class="actionbtn">
+                  <a class="viewaction">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a>
+                  <a class="playaction">
+                    <i class="fa fa-play" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </td> -->
+            </tr>
+           
+          </tbody>
+        </table>
+      </div>
+      <app-pagination *ngIf="selectedProcessId && selectedProcessId != 0" class="my-pagination" [pageSize]="pageSize" [pagesQuantity]="count"
+        (pageChanged)="getProcessSelectedList($event)"></app-pagination>
+
+    </div>
+    <!-- <div class="backbtn">
+      <i class="fa fa-arrow-left" aria-hidden="true" (click)="_location.back()"> Back</i>
+    </div> -->
+    <div class="projects-footer">
+      <div class="back-button" (click)="_location.back()">Back</div>
+    </div>
+  </div>
+</main>

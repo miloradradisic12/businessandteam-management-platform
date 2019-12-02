@@ -1,0 +1,8 @@
+<app-document-explorer *ngIf="process"
+                       class="app-document-explorer"
+                       [items]="documents | filterDocumentType: process.documentTypeFilter"
+                       (open)="openDocument($event)"
+                       (createDocument)="createDocument($event)"
+                       (renameDocument)="renameDocument($event.item, $event.name)"
+                       (deleteDocument)="deleteDocument($event)">
+</app-document-explorer>

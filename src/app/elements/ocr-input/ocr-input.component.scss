@@ -1,0 +1,21 @@
+.drop_files { position: relative; 
+    .close a {     display: block;
+      color: #e2e2e2;
+      right: 0px;
+      position: absolute;
+      top: 24px;
+      background: red;
+      padding: 5px;
+      border-radius: 360px;
+      width: 35px;
+      text-align: center;}
+  }
+.file-container {
+  border: 1px solid #ccc;
+  background: #fff;
+  margin: 10px 0;
+}
+pre.file-container { padding:15px; }
+pre.file-container:empty { visibility: hidden; }
+.radiogroup { margin-bottom: 15px;}
+

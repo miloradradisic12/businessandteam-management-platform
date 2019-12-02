@@ -1,0 +1,109 @@
+<div class="hire_employees">
+       
+
+  <div class="projects-search">
+    <div class="search-icon"></div>
+    <input class="form-control" type="text"
+           placeholder="Search here"
+           [(ngModel)]="searchText"
+           (input)="valueChange()"/>
+  </div>
+<!--  <table class="table table-hover projects-table employee-table">
+     <tbody>
+     
+      <tr>
+        <td>
+          <div class="Employee-title">
+            <div class="employee-name">Mike Smith (5.5 years)</div>
+            <div class="employee-details">
+              <div class="employee_des">HTML Developer</div><div class="ava">Availability : 20 hrs/ week</div></div>
+              <div text-orange>Responded as not availabe</div>
+
+          </div>
+        </td>
+        <td>
+          <div class="Employee-oth">
+            <div class="employee-starrate"><ngb-rating [rate]="3"></ngb-rating></div>
+            <div class="employee-budget">$ 25/hr</div>
+          </div>
+        </td>          
+        <td>
+          <div class="project-actions">
+            <div class="btn-border skyblue">
+              <div class="btn skyblue-btn">Profile</div>
+            </div>
+            <div class="btn-border blue">
+              <div class="btn blue-btn">Message</div>
+            </div>
+            <div class="btn-border orange">
+              <div class="btn orange-btn">Hire</div>
+            </div>
+          </div>
+        </td>
+      </tr>     
+    </tbody>
+  </table> -->
+
+  <table class="table table-hover employee-table">
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>
+          <div class="Employee-title">
+            <div  (click)="getProfile(employee.userprofile_id)">
+              <div class="employee-name">{{employee.first_name}} {{employee.last_name}} ({{employee.experience}})</div>
+            </div>
+            <div class="employee-details"><div class="employee_des">{{employee.job_title}}</div>
+            <div class="ava">Availability : {{employee.availability_details[0].hours_per_day.title}}-hours/day</div></div><!--*********-->
+            <div class="text-skyblue">{{employee.final_status}}</div>
+          </div>
+        </td>
+        <td>
+          <div class="Employee-oth">
+            <div class="employee-starrate"><ngb-rating [rate]="3"></ngb-rating></div><!--*********-->
+            <!-- <div class="employee-budget">{{employee.hourlycharges}}</div> -->
+            <div class="employee-budget">{{employee.availability_details[0].hourly_charges.title}}</div>
+           
+          </div>
+        </td>          
+        <td>
+          <div class="project-actions">                 
+            
+            <div class="btn-border skyblue" >
+                <div class="btn skyblue-btn">Message</div>
+              </div>
+              <!-- <div class="btn-border orange" (click)="interviewletter(employee)">
+                <div class="btn orange-btn">Hire</div>
+              </div> -->
+              <div class="btn-border orange">
+                  <button type="button" *ngIf="employee.offer_details && employee.offer_details.envelop == null" class="btn orange-btn" [disabled]="flagHired" (click)="interviewletter(employee)">Hire</button>
+                  <button type="button" *ngIf="employee.offer_details && employee.offer_details.envelop != null" class="btn orange-btn" (click)="checkDocuSign(employee, popUpForDocuSignMessage)">Appointment Letter</button>
+                  <!-- <div class="btn orange-btn">Hire</div> -->
+                </div> 
+              <!-- <div class="btn-border blue"  (click)="ScheduledInterview(employee)" >
+                <div class="btn blue-btn">Inteview</div>
+              </div>  -->
+              <div class="btn-border skyblue" *ngIf="employee.reschedule_details != undefined && employee.reschedule_details.is_employee != undefined && employee.reschedule_details.is_employee == true && employee.reschedule_details.status != 'accept'" (click)="ConfirmRescheduledInterview(employee.reschedule_details)">
+                <div class="btn skyblue-btn">Confirm</div>
+              </div>
+              <div class="btn-border skyblue" *ngIf="employee.reschedule_details != undefined && employee.reschedule_details.is_employee != undefined && employee.reschedule_details.is_employee == true && employee.reschedule_details.status != 'accept'" (click)="rescheduleMyInterview(employee.reschedule_details)">
+                <div class="btn skyblue-btn">Reschedule</div>
+              </div>
+          </div>
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+  <!-- <app-pagination class="my-pagination" [pageReset]="paginationReset" [pageSize]="pageSize" [pagesQuantity]="count" (pageChanged)="getNewProjectList($event)"></app-pagination> -->
+  <app-pagination class="my-pagination" [pageSize]="pageSize" [pagesQuantity]="count" (pageChanged)="getNewEmpoloyeeList($event)"></app-pagination>
+
+
+</div>
+<ng-template #popUpForDocuSignMessage>
+  <div class="modal-body">DocuSign is pending on either side.</div>
+  <div class="modal-footer">
+    <div class="buttons">
+      <div class="btn btn-ok" (click)="popUpForDocuSignModalRef.close()">Ok</div>
+    </div>
+  </div>
+</ng-template>

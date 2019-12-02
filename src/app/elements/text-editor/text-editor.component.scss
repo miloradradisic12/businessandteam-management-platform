@@ -1,0 +1,24 @@
+.app-text-editor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .ql-container {
+    height: auto;
+    flex: 1;
+    // margin: 24px 35px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    height: 150px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .app-text-editor {
+    height: 100%;
+
+    .ql-container {
+      margin: 15px;
+    }
+  }
+}

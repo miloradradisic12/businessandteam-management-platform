@@ -1,0 +1,143 @@
+.editor-tools-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: #666666;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+}
+
+.color-picker {
+  display: flex;
+
+  .colors {
+    padding: 6px 9px;
+    font-size: 0;
+  }
+
+  .color {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    border: 1px solid transparent;
+    cursor: pointer;
+
+    &.transparent {
+      background: url('/assets/img/transparent.jpg');
+      border: 0;
+    }
+  }
+
+  .color + .color {
+    margin-left: 10px;
+  }
+
+  .close {
+    border-left: 1px solid #aaaaaa;
+    width: 31px;
+    height: 31px;
+    background: url("/assets/img/close_btn.png") no-repeat center;
+    background-size: 50%;
+  }
+}
+
+.tool-item {
+  display: flex;
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 21px;
+
+  .border {
+    display: flex;
+    padding: 6px 12px;
+
+    .border-width {
+      width: 35px;
+      text-align: center;
+    }
+
+    input {
+      height: 20px;
+      margin-top: -2px;
+      width: 35px;
+      text-align: center;
+    }
+
+    div {
+      text-decoration: underline;
+      cursor: pointer
+    }
+
+    div + div {
+      margin-left: 6px;
+    }
+  }
+
+  .fill {
+    display: flex;
+    border-left: 1px solid #fff;
+    padding: 6px 12px;
+
+    div + div {
+      margin-left: 6px;
+    }
+  }
+
+  &.font-tools {
+    display: flex;
+    padding: 6px 12px;
+
+    .font-size {
+      width: 35px;
+      text-align: center;
+    }
+
+    .text-alignment {
+      text-decoration: none;
+
+      i {
+        opacity: 0.7;
+      }
+
+      i + i {
+        margin-left: 5px;
+      }
+
+      i.active {
+        opacity: 1;
+      }
+    }
+
+    input {
+      height: 20px;
+      margin-top: -2px;
+      width: 35px;
+      text-align: center;
+    }
+
+    div {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    div + div {
+      margin-left: 6px;
+    }
+  }
+
+  .color {
+    width: 21px;
+    height: 21px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    margin-left: 6px;
+
+    &.transparent {
+      background: url('/assets/img/transparent.jpg');
+      border: 0;
+    }
+  }
+}

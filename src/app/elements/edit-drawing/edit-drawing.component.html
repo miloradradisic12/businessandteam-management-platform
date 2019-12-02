@@ -1,0 +1,56 @@
+<app-import-toolbar
+  (fileChosen)="onFileChosen($event)"
+></app-import-toolbar>
+
+<div class="edit-drawing">
+  <div [id]="editorId" class="mx-editor"></div>
+
+  <app-edit-drawing-toolbar
+    [toolbarPosition]="toolbarPosition"
+    [tool]="activeTool"
+    [editingStyle]="editedStyle"
+    (styleChanged)="onStyleChanged($event)"
+  ></app-edit-drawing-toolbar>
+
+  <div class="history-toolbar">
+    <div class="history">
+      <div (click)="undo()">
+        <img src="/assets/img/undo.png" alt="">
+      </div>
+      <div (click)="redo()">
+        <img src="/assets/img/redo.png" alt="">
+      </div>
+    </div>
+    <div class="zoom">
+      <div class="zoom-trigger" (click)="zoomOut()">-</div>
+      <div class="zoom-percentage">{{ zoom[zoomIndex].display }}</div>
+      <div class="zoom-trigger" (click)="zoomIn()">+</div>
+    </div>
+  </div>
+
+  <div class="drawing-panel-wrapper">
+    <div *ngIf="isFiguresVisible" class="drawing-figures">
+      <div class="close" (click)="isFiguresVisible = !isFiguresVisible">&times;</div>
+
+      <div class="figures">
+        <div *ngFor="let figure of figures" class="figure" (click)="drawFigure(figure.type)">
+          <img [src]="figure.img" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isPanelVisible" class="drawing-categories">
+      <div class="drawing-category figures_tool" (click)="isFiguresVisible = !isFiguresVisible; isPanelVisible = false"></div>
+      <div class="drawing-category text_tool" (click)="drawText()"></div>
+      <div class="drawing-category image_tool">
+        <input type="file" accept="image/*" (change)="drawImage($event)">
+      </div>
+      <div class="drawing-category line_tool" (click)="drawEdge()"></div>
+    </div>
+
+    <div class="open-button"
+         [class.pressed]="isPanelVisible"
+         (click)="isPanelVisible = !isPanelVisible"
+    >+</div>
+  </div>
+</div>

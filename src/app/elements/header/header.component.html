@@ -1,0 +1,14 @@
+<nav class="bg-saffron">
+  <div class="logo-block">
+    <div class="logo" (click)="goHome()">
+      <img src="/assets/logos/saffronlogosvg.svg" alt="">
+    </div>
+
+    <div class="back-link" *ngIf="backNavOptions">
+      <span (click)="goBack()"><strong>Back to</strong> <b [title]="backNavOptions.caption">{{backNavOptions.caption}}</b></span>
+    </div>
+  </div>
+  <app-profile-menu *ngIf="isLoggedIn" class="pull-right"></app-profile-menu>
+
+</nav>
+

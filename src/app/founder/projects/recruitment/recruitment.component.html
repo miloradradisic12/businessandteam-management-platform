@@ -1,0 +1,39 @@
+
+  <app-header [backNavOptions]="{caption: project.title, route: ['founder', 'projects', project.id]}"></app-header>
+
+<main>
+  
+  <div class="container recruitment-wrap saf_blue_theme" id="recruitment-wrap">
+      <div class="heading">
+          <h1>Recruitment</h1>          
+      </div>
+    <ng-container>
+          <div class="card" *ngFor="let item of qaList; let index = index">
+            <div class="card-block">
+              <h3 class="card-title" (click)="toggleAccordian($event,index)">
+                <i class="icomoon icon-next-1"></i>
+                {{item.panelname}}
+                <span class="pull-right"
+                      [class.icon-up-arrow]="!isCollapsedArray[index]"
+                      [class.icon-down-arrow]="isCollapsedArray[index]"
+                      
+                      ></span>
+              </h3>
+              <div class="card-text" [ngbCollapse]="isCollapsedArray[index]">
+                <app-post-job [projectId]="projectId" *ngIf="item.panelname=='Post a Job'"></app-post-job>
+                <app-hire-employees [projectId]="projectId" *ngIf="item.panelname=='Hire Employees'"></app-hire-employees>
+                <app-proposals [projectId]="projectId" *ngIf="item.panelname=='Proposals'"></app-proposals>
+                <app-my-employee [projectId]="projectId" *ngIf="item.panelname=='My Employees'"></app-my-employee>
+                <app-previous-employees [projectId]="projectId" *ngIf="item.panelname=='Previous Employees'"></app-previous-employees>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <div class="projects-footer">
+          <div class="back-button" (click)="_location.back()">Back</div>
+        </div>
+
+
+
+  </div>
+</main>

@@ -1,0 +1,30 @@
+<div class="charroomwrap" [ngClass]="{'chatscrfull':chatscrfullvar}">
+  <div class="charrooms">
+      <span class="open_trigger" (click)="checkchatscrfun()"><i class="icomoon icon-menu2"></i></span>
+      <h5>Chat Groups</h5>
+    <ul>
+      <li *ngFor="let item of roomList?.ims; let i = index" (click)="selectedGroup(item._id, item.username)">{{item.username}}</li>
+    </ul>
+  </div>
+
+  <div class="chatsection">
+    <!-- <app-project-room></app-project-room> -->
+    <app-project-room *ngIf="selectedRoomId && selectedRoomId != ''" [roomId]="selectedRoomId" [groupName]="selectGroupName"></app-project-room>      
+
+
+
+    <!-- <p-accordion *ngIf="roomList" (onOpen)="onTabOpen($event)" (onClose)="onTabClose($event)">
+  <p-accordionTab *ngFor="let item of roomList.ims; let i = index" class="card">
+    <p-header>
+      <h3 class="card-title">
+        <i class="icomoon icon-next-1"></i> {{item.username}}
+        <span class="pull-right icon-down-arrow"></span>
+      </h3>
+    </p-header>
+    <div class="taskmainwrap" *ngIf="selectedIntex == i">
+      <app-project-room [roomId]="item._id"></app-project-room>      
+    </div>
+  </p-accordionTab>
+</p-accordion> -->
+  </div>
+</div>

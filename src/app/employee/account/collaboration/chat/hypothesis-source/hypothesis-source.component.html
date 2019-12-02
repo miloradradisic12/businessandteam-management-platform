@@ -1,0 +1,19 @@
+<label>
+  <strong>{{question1}}</strong>
+</label>
+<div class="new-message">
+  <textarea placeholder="Type your answer here" [(ngModel)]="answer1" (keydown)="onTextInputKeyPress($event)"></textarea>
+  <div class="btn send-btn" (click)="sendHypothesisMessage()"></div>
+</div>
+<label>
+  <strong>{{question2}}</strong>
+</label>
+<div class="new-message">
+  <textarea placeholder="Type your answer here" [(ngModel)]="answer2" (keydown)="onTextInputKeyPress($event)"></textarea>
+</div>
+<label>
+  <strong>{{question3}}</strong>
+</label>
+<div class="new-message">
+  <textarea placeholder="Type your answer here" [(ngModel)]="answer3" (keydown)="onTextInputKeyPress($event)"></textarea>
+</div>

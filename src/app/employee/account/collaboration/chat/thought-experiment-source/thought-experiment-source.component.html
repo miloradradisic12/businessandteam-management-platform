@@ -1,0 +1,13 @@
+<label>
+  <strong>{{question1}}</strong>
+</label>
+<div class="new-message">
+  <textarea placeholder="Type your answer here" [(ngModel)]="answer1" (keydown)="onTextInputKeyPress($event)"></textarea>
+  <div class="btn send-btn" (click)="sendThoughExperimentMessage()"></div>
+</div>
+<label>
+  <strong>{{question2}}</strong>
+</label>
+<div class="new-message">
+  <textarea placeholder="Type your answer here" [(ngModel)]="answer2" (keydown)="onTextInputKeyPress($event)"></textarea>
+</div>

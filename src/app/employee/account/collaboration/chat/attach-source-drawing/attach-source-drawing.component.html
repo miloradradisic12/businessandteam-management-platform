@@ -1,0 +1,27 @@
+<div class="new-message">
+  <textarea placeholder="Add your source here" (blur)="eventEmitSourceBlur($event)" [(ngModel)]="sourceText"></textarea>
+  <app-file-droppa [dropZoneTemplate]="dropZoneChartTemplate" [url]="" [multiple]="false" [autoUpload]="false" [showFilesList]="false"
+    (filesUpdated)="sourceFilesUpdated($event)" [openTriggerId]="'passportTrigger'">
+
+    <div class="profile-buttons">
+      <div class="trigger" id="passportTrigger">
+      </div>
+    </div>
+  </app-file-droppa>
+</div>
+
+<div class="new-message drawingbox">
+  <app-vd-canvas #vdCanvas [options]="canvasOptions" [(ngModel)]="drawingAttachment.file">
+  </app-vd-canvas>
+  <div (click)="sendDrawing()" class="btn send-btn"></div>
+
+  <!-- <textarea placeholder="Drawing" (blur)="eventEmitDrawingBlur($event)" [(ngModel)]="drawingText"></textarea>
+  <app-file-droppa [dropZoneTemplate]="dropZoneChartTemplate" [url]="" [multiple]="false" [autoUpload]="false" [showFilesList]="false"
+    (filesUpdated)="drawingFilesUpdated($event)" [openTriggerId]="'passportTrigger'">
+
+    <div class="profile-buttons">
+      <div class="trigger" id="passportTrigger">
+      </div>
+    </div>
+  </app-file-droppa> -->
+</div>

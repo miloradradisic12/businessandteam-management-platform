@@ -1,0 +1,77 @@
+<div class="container-fluid bg-gradient">
+  <div *ngIf="!callback" class="container-main bg-image">
+    <div class="container-border">
+      <!-- <app-navbar [isLoggedIn]="false" class="mobile-hidden"></app-navbar> -->
+      <div class="login-box container">
+        <!-- <div class="close-btn hidden-sm-up" [routerLink]="['/']"></div> -->
+        <div class="col-12">
+          <div class="container-title">ID Upload Validation</div>
+          <div>
+            <form action="." #f="ngForm">
+              <div class="form-group form-inputs">
+                <div class="row">
+                  <div class="col-12 file_dropzone drop_files">
+                    <div [ngClass]="{'imageselected':flagPassportID}">
+                      <app-upload-capture-image 
+                        [withFileDroppa]="true" 
+                        [dropTriggerId]="'signupIdUploadTrigger'" 
+                        [imageSrc]="profile.passport_photo"
+                        (filechanged)="imageChangeListener($event,'passport_photo')">
+                      </app-upload-capture-image>
+
+                      <!-- <app-file-droppa class="file_dropper" #fileDroppa [dropZoneTemplate]="dropZonePassportTemplate" [url]="" [multiple]="false"
+                        [autoUpload]="false" [showFilesList]="false" (filesUpdated)="filesUpdated($event, 'passport_photo')"
+                        [openTriggerId]="'passportTrigger'">
+                        <div class="close" *ngIf='flagPassportID'>
+                          <a (click)="removeID('passport_photo')">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          </a>
+                        </div>
+                        <div>
+                          <br>
+                          <p class="dropzone-help-text">Drag & Drop new file to the file area or</p>
+
+                          <div class="profile-buttons">
+                            <div class="trigger" id="passportTrigger">
+                              <span class="icon upload"></span>
+                              <label>Upload new photo</label>
+                            </div>
+
+                            <div class="trigger" (click)="takePhotoPopover.open()" (shown)="closePopoverpWithDelay(10000, takePhotoPopover, 'projectTimer')"
+                              [triggers]="'none'" [container]="'body'" [ngbPopover]="takePhotoNotification" #takePhotoPopover="ngbPopover"
+                              placement="top">
+                              <span class="icon take"></span>
+                              <label>Take a photo</label>
+                            </div>
+                          </div>
+                        </div>
+                      </app-file-droppa> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="btn-border pull-right">
+                      <button class="enter-btn" type="submit">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container-other-buttons row">
+        <div class="link text-left col-4 mobile-hidden" [routerLink]="['/']">
+          <i class="fa fa-arrow-left"></i> Back</div>
+      </div>
+    </div>
+    <div class="privacy-policy singin">By tapping "Join" you are agreeing to the
+      <span class="c-white" (click)="openTermsOfUseModal()">Terms of use</span> and
+      <span class="c-white text_underline" (click)="openPrivacyPolicyModal()">Privacy policy</span>
+    </div>
+  </div>
+  <div *ngIf="callback" class="container-main bg-image">
+    <div class="container-title text-center">Retrieving login information...</div>
+  </div>
+</div>

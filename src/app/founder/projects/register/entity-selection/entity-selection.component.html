@@ -1,0 +1,51 @@
+<!-- <div class="container-fluid">
+    <div class="container-main">
+      <div class="container-border">
+        <app-navbar></app-navbar>
+        Entity Selection loaded
+        <div>
+            <h1>Register</h1>
+            <div *ngFor="let entity of entities; let i=index">
+                <div>
+                    {{entity.title}}
+                    <br>
+                    {{entity.description}}
+                    <br>
+                    {{entity.amount}}
+                    <br>
+                    <button (click)="onSelectEntity(entity)">Select</button>
+                </div>                
+            </div>
+        </div>
+      </div>
+    </div>
+</div> -->
+<div class="container-fluid">
+    <div class="container-main">
+        <div class="container-border">
+            <app-navbar></app-navbar>
+            <div class="projects-container">
+                <div class="projects-header">
+                    <div class="project-header-text">
+                        <span class="projects-header-caption">Register</span>
+                    </div>          
+                </div>          
+                <div class="entitywrap" myMatchHeight="eqalheight">
+                    <div class="row" myMatchHeight="entitybox">
+                        <div *ngFor="let entity of entities; let i=index" class="col-md-3 col-sm-6 entitybox">
+                            <div class="entitytitle">{{entity.title}}</div>                                        
+                            <div class="entitydesc eqalheight"><p>{{entity.description}}</p></div> 
+                            <div class="entityamount">Pricing starts<span>{{entity.amount}}</span></div>
+                            <div class="entitybtn"><button class="btn btn-orange" (click)="onSelectEntity(entity)">Select</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-footer">
+                <div class="back-button" (click)="_location.back()">Back</div>
+            </div>
+
+        </div>
+    </div>
+</div>

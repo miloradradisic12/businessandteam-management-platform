@@ -1,0 +1,17 @@
+<div class="container-fluid kanbonboard">
+  <div class="container-main">
+
+    <app-header [backNavOptions]="{caption: project.title, route: ['founder', 'projects', project.id]}"></app-header>
+
+    <div class="content-main">
+      <div class="content-main-header">
+        <div class="title">{{milestone_title}}</div>
+        <div class="btn-group">
+          <a (click)="editGoalBtnClicked()" [ngClass]="edit_btn_class" ></a>
+          <a routerLink="./newgoal" class="add_btn" ></a>
+        </div>
+      </div>
+      <div class="content-main-body" #dynamicComponentContainer></div>
+    </div>
+  </div>
+</div>

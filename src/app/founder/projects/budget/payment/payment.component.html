@@ -1,0 +1,82 @@
+<app-header [backNavOptions]="{caption: project.title, route: ['founder', 'projects', project.id]}"></app-header> 
+<main>
+  
+  <div class="container saf_blue_theme">
+      <div class="heading">
+          <h1>Budget</h1>          
+      </div>
+
+      <div class="cardwrap">
+        <div class="card">
+        <h2>My Expenses</h2>
+        <div class="progress bg-voilet">
+          <div class="progress-bar bg-danger" style="width:60%">            
+          </div>              
+        </div>  
+        <div class="valuewrap">
+            <span class="value" style="left:60%">$60,000</span>
+            <span class="totalvalue">$100,000</span>     
+          </div>
+    
+      </div>     
+           
+
+        <div class="card">
+        <h2>My Payment</h2>
+        <div class="projects-search">
+            <div class="search-icon"></div>
+            <input class="form-control" type="text"
+                   placeholder="search here"
+                   [(ngModel)]="searchText"
+                   (input)="valueChange()"/>
+          </div>
+          <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Paid for</th>
+                <th >Receiver</th>
+                <th  width="120px">Payment Date </th>
+                <th  width="120px">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Salary</td>
+                <td>Dipak Sapkal</td>
+                <td>Dec 27, 2017</td>
+                <td>$2000</td>
+              </tr>
+              <tr>
+                  <td>Salary</td>
+                  <td>Dipak Sapkal</td>
+                  <td>Dec 27, 2017</td>
+                  <td>$2000</td>
+                </tr>
+                <tr>
+                    <td>Salary</td>
+                    <td>Dipak Sapkal</td>
+                    <td>Dec 27, 2017</td>
+                    <td>$2000</td>
+                  </tr>
+                  <tr>
+                      <td>Salary</td>
+                      <td>Dipak Sapkal</td>
+                      <td>Dec 27, 2017</td>
+                      <td>$2000</td>
+                    </tr>
+            </tbody>
+        </table>
+        </div>
+        <app-pagination class="my-pagination" [pageSize]="pageSize" [pagesQuantity]="count" (pageChanged)="getPaymentInfo($event)"></app-pagination>
+
+
+      </div>       
+
+      </div>
+    
+        <div class="projects-footer">
+          <div class="back-button" (click)="_location.back()">Back</div>
+        </div>
+   </div>
+</main>

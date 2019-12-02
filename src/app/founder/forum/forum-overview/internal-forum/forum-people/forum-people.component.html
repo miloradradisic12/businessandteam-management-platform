@@ -1,0 +1,29 @@
+
+<div class="cardwrap"  *ngIf="selectedUserId == 0; else userInfonThread">
+    <div class="cardheading">
+      <div class="row">
+        <div class="col-6">
+          <h3>People</h3>         
+        </div>    
+      </div>
+    </div>
+    <div class="cardbody">
+          <div class="peoplewrap">
+              <div class="peoplebox" *ngFor="let item of forumUserInfoList">
+                <div class="peopleclickbox"  (click)="selectedUser(item.id)">
+                <div class="peopleimgbox">
+                    <div>
+                      <img  *ngIf="item.image && item.image != null" [src]="item.image" alt="">
+                    </div>
+                </div>
+                <h4>{{item.name}}</h4>
+              </div>
+              </div>
+            </div>
+      </div>
+</div>
+
+
+<ng-template #userInfonThread class="cardwrap">
+  <app-preview-people *ngIf="userThreadInfoList" [userThreadInfoList]="userThreadInfoList"></app-preview-people>
+</ng-template>

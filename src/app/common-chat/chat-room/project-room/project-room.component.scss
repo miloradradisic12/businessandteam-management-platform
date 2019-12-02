@@ -1,0 +1,84 @@
+  .chat-message { height: calc(100% - 120px) !important; }
+  perfect-scrollbar { height: 100%; }
+  .chatroomname { font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  
+    padding: 15px 25px;
+    border-bottom: 1px solid #ccc;}
+  .new-message {
+    display: flex;
+    height: 56px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
+    textarea {
+      color: #3D3C40;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      padding: 10px 20px;
+      resize: none;
+      font-size: 18px;
+      line-height: 31px;
+
+      &::placeholder {
+        color: #999999;
+      }
+    }
+
+    .send-btn {
+      height: 100%;
+      width: 45px;
+      min-width: 45px;
+      background-image: url('/assets/img/collaboration/send.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      border-left: 1px solid #cccccc;
+    }
+    
+  }
+
+.scrollingcontent  { padding: 15px 15px  0; }
+  .message {   position: relative;  padding: 0  0 0 70px; min-height: 70px; margin-bottom:10px;   
+  .user { color:#404040; font-size: 14px; 
+   .username { font-weight: bold; }
+  }
+  .user-photo {position: absolute; top: 0; left: 0;  width: 50px; height: 50px; border-radius: 360px; min-width: 50px; overflow: hidden; display: block;
+
+    background: #ccc url(/assets/img/navbar-noavatar-icon.png) no-repeat center;
+  img {
+    width: 100%; height: auto; min-height: 100%; 
+   }
+   }
+   .message-body {
+    background: #6a9df6; padding: 10px 15px; display: inline-block;
+    color: #fff;
+    border-radius: 0 10px 10px 10px;
+    position: relative;
+    &:before {
+      content: "";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    border-style: solid;
+    z-index: 1;
+    border-width: 5px;
+    border-color: #6a9df6 #6a9df6 transparent transparent;
+    }
+   }
+   &.currentuser {  text-align: right;
+    padding: 0 70px 0 0;
+    .user-photo { left: auto; right: 0; }
+  .message-body  {border-radius: 10px 0 10px 10px; background: #FE5F5B;
+  &:before {
+    border-color: #FE5F5B  transparent transparent  #FE5F5B; right: auto; left: 100%;
+  }
+  
+  }
+  }
+  }
+

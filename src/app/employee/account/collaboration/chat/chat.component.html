@@ -1,0 +1,251 @@
+<!-- <aside class="process_details" [class.mobile_open]="activeMobileView && activeMobileView !== 'null'"> -->
+<aside class="process_details" [class.closed]="isProcessesOpen" [class.mobile_open]="activeMobileView === 'menu'">
+
+
+  <span class="open_trigger" (click)="isProcessesOpen = !isProcessesOpen">
+    <i class="icomoon icon-menu2"></i>
+  </span>
+
+  <div class="chatwrap">
+    <div class="switcher">
+      <div class="open-chat" [class.hidden]="isChatOpen" (click)="openChat()">Go to
+        <b>Discussion &rarr;</b>
+      </div>
+
+      <div class="open-details" [class.hidden]="!isChatOpen" (click)="isChatOpen = !isChatOpen">
+        <b>&larr;</b> Back to
+        <b>Details</b>
+      </div>
+    </div>
+
+    <div class="details" [class.hidden]="isChatOpen" [class.open]="activeMobileView === 'details'">
+      <h4>Details</h4>
+      <div class="users">
+        <a href="#" (click)="$event.preventDefault()" *ngFor="let user of users">
+          <img *ngIf="user.photo_crop" src="{{user.photo_crop}}" alt="">
+        </a>
+      </div>
+      <app-chat-participants *ngIf="process.participants" [process]="process"></app-chat-participants>
+
+      <div class="details-text">
+        <p>Photographs are a way of preserving a moment in our lives for the rest of our lives.</p>
+      </div>
+
+      <div class="details-date">
+        <b>Due on</b>{{process.due_date | date: 'MMM dd, yyyy HH:mm'}}
+      </div>
+
+      <div class="details-rules">
+        <h4>Rules</h4>
+        <ul *ngIf="process.rules && process.rules.length > 0">
+          <li *ngFor="let rule of process?.rules">{{rule.title}}</li>
+        </ul>
+      </div>
+      <div class="form-group private-question">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="form-control custom-control-input" [(ngModel)]="process.is_complete" [disabled]="process.is_complete"
+            (change)="isComplete($event)">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description"> is Complete</span>
+          <i class="fa fa-lock font-large ml-1" aria-hidden="true"></i>
+        </label>
+      </div>
+    </div>
+
+    <div class="chat" [class.hidden]="!isChatOpen" [class.open]="activeMobileView === 'chat'">
+      <h4>Discussion</h4>
+      <div class="chat-section">
+        <div class="chat-messages" #chatmessagesHgt>
+          <perfect-scrollbar>
+            <div class="scrollingcontent">
+              <div class="message" *ngFor="let message of messages">
+                <div class="user" *ngIf="message.user">
+                  <span class="user-photo">
+                    <img *ngIf="message.user.photo_crop" [src]="message.user.photo_crop" alt="">
+                  </span>
+                  <span class="user-name" [attr.title]="getUsername(message.user)">
+                    <span class="username">{{getUsername(message.user)}}</span>
+                    <span class="message-time">{{message.time | date:'shortTime'}}</span>
+                    <!--*ngIf="message.message_type != undefined && message.message_type != null && message.message_type != '' && message.message_type != 'decision_poll' && !message.is_reply && message.userId != credentials.user_id"-->
+                    <span class="message-type" style="cursor: pointer;" *ngIf="message.message_type != undefined && message.message_type != null && message.message_type != '' && message.message_type != 'decision_poll' && !message.is_reply && message.userId != credentials.user_id"
+                      (shown)="closePopoverpWithDelay(3000, stagePopover, 'stageTimer-response')" [triggers]="'none'" [container]="'body'"
+                      [ngbPopover]="stagePopoverTemplate" #stagePopover="ngbPopover" appPopoverAutoPosition [popOverName]="stagePopover"
+                      [placement]="{desktop:'bottom', tablet:'bottom', mobile:'none'}" (click)="setDataForResponse(message, stagePopover)">{{message.message_type}} &nbsp;&nbsp;&nbsp;<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                      <ng-template #stagePopoverTemplate>
+                        <div class="buttons opinionsbtns">
+                          <div class="opinion-btn" (click)="postADR('agree', message, stagePopover)">Agree</div>
+                          <div class="opinion-btn" (click)="postADR('disagree', message, stagePopover)">Disagree</div>
+                          <div class="opinion-btn" (click)="postADR('request', message, stagePopover)">Request</div>
+                          <div class="opinion-btn dots">
+                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </span>
+                    <span class="message-type" *ngIf="message.message_type != undefined && message.message_type != null && message.message_type != '' && (message.message_type == 'decision_poll' || message.is_reply)">
+                      {{message.message_type}}
+                    </span>
+                  </span>
+
+                </div>
+                <div *ngFor="let attachment of message.attachments" class="replyfor">
+                  <small>{{attachment.title}}</small>
+                  <img [src]="attachment.image_url | safeUrl" alt="" height="200">
+                  <a [href]="attachment.image_url | safeUrl" target="_blank">Download</a>
+                </div>
+
+                <div [ngSwitch]="message.message_type">
+
+                  <div *ngSwitchCase="'decision_poll'">
+                    <div class="pollwrap">
+                      <p class="question_heading" [innerHTML]="message.text"></p>
+
+                      <ul *ngIf="message.message_type == 'decision_poll' && !message.is_reply && message.userId != credentials.user_id">
+                        <li *ngFor="let option of message.options">
+                          <!-- <input type="radio" name="options" value="option.id" (change)="selectedPollOption(option.id, message)"> {{option.option}} -->
+                          <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="options" value="option.id" (change)="selectedPollOption(option.id, message)">
+
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{option.option}}</span>
+                          </label>
+                        </li>
+                      </ul>
+                      <div *ngIf="message.message_type == 'decision_poll' && (message.is_reply || message.userId == credentials.user_id)">
+                        <div class="project-stage" *ngFor="let option of message.options">
+                          <div class="project-stage-caption">{{option.option}}</div>
+                          <div class="project-stage-progress-bar">
+                            <div class="project-stage-completed" [style.width.%]="option.percentage">
+                              {{option.percentage}}%
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="message_box" *ngSwitchCase="'hypothesis'">
+                    <div [innerHTML]="message.text"></div>
+                  </div>
+                  <div class="message_box" *ngSwitchCase="'thought_experiment'">
+                    <div [innerHTML]="message.text"></div>
+                  </div>
+                  <p *ngSwitchDefault class="message-body" [innerHTML]="message.text"></p>
+                </div>
+              </div>
+            </div>
+
+          </perfect-scrollbar>
+        </div>
+        <div class="chatbottomoptions" #chatbottomoptions>
+          <div *ngIf="messageType != '' && messageType != undefined" class="new-message-help-text">Ctrl / Command + Enter to send a message</div>
+          <div *ngIf="messageType != '' && messageType != undefined && (messageType == 'opinion' || messageType == 'decisions' || messageType == 'argument' || messageType == 'decision_poll' || messageType == 'gut_feeling')"
+            class="new-message">
+            <textarea placeholder="Type your message here" (keydown)="onTextInputKeyPress($event, messageType)" [(ngModel)]="messageText"></textarea>
+            <div class="btn send-btn" (click)="sendMessage(messageType)"></div>
+          </div>
+          <!-- <div class="new-message-help-text">Ctrl / Command + Enter to send a message</div>
+    <div class="new-message">
+      <textarea placeholder="Type your message here" (keydown)="onTextInputKeyPress($event, messageType)" [(ngModel)]="messageText"></textarea>
+      <div class="btn send-btn" (click)="sendMessage(messageType)"></div>
+    </div> -->
+
+          <div [ngSwitch]="messageType" class="chartfile">
+            <div *ngSwitchCase="'opinion'">
+              <app-attach-source-drawing (selctedSourceAttachment)="selctedSourceAttachment($event)" (selectedDrawingAttachment)="selectedDrawingAttachment($event)"></app-attach-source-drawing>
+            </div>
+            <div *ngSwitchCase="'decisions'">
+              <app-attach-source-drawing (selctedSourceAttachment)="selctedSourceAttachment($event)" (selectedDrawingAttachment)="selectedDrawingAttachment($event)"></app-attach-source-drawing>
+            </div>
+            <div *ngSwitchCase="'argument'">
+              <app-attach-source-drawing (selctedSourceAttachment)="selctedSourceAttachment($event)" (selectedDrawingAttachment)="selectedDrawingAttachment($event)"></app-attach-source-drawing>
+            </div>
+            <div *ngSwitchCase="'decision_poll'">
+              <app-decision-poll-source *ngFor="let option of decisionPollSelectedList" [decisionPollSelected]="option" (removeOption)="removePollOption($event)"
+                (addOption)="addPollOption($event)"></app-decision-poll-source>
+            </div>
+            <div *ngSwitchCase="'assumption'">
+              <app-assumption-source (assumptionMsg)="assumptionMsg($event)"></app-assumption-source>
+            </div>
+            <div *ngSwitchCase="'thought_experiment'">
+              <app-thought-experiment-source (thoughExperimentMsg)="thoughExperimentMsg($event)"></app-thought-experiment-source>
+            </div>
+            <div *ngSwitchCase="'hypothesis'">
+              <app-hypothesis-source (hypothesisMsg)="hypothesisMsg($event)"></app-hypothesis-source>
+            </div>
+            <div *ngSwitchCase="'gut_feeling'">
+              <app-attach-source-drawing (selctedSourceAttachment)="selctedSourceAttachment($event)" (selectedDrawingAttachment)="selectedDrawingAttachment($event)"></app-attach-source-drawing>
+            </div>
+            <!-- <div *ngSwitchCase="'task'">
+        task
+      </div> -->
+          </div>
+
+          <div>
+            <!-- <button type="button" (click)="setMessageType('opinion')">Opinion</button>
+      <button type="button" (click)="setMessageType('decisions')">Decisions</button>
+      <button type="button" (click)="setMessageType('argument')">Argument</button>
+      <button type="button" (click)="setMessageType('decision_poll')">Poll</button>
+      <button type="button" (click)="setMessageType('assumption')">Assumption</button>
+      <button type="button" (click)="setMessageType('thought_experiment')">Thought Experiment</button>
+      <button type="button" (click)="setMessageType('hypothesis')">Hypothesis</button>
+      <button type="button" (click)="setMessageType('gut_feeling')">Gut Feeling</button> -->
+
+            <ul class="chat-option clearfix">
+              <li>
+                <a href="javascript:void(0)" [ngClass]="{'active':messageType=='opinion'}" (click)="setMessageType('opinion')">
+                  <i class="icomoon icon-opinion" aria-hidden="true"></i>
+                  <span>Opinion</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" [ngClass]="{'active':messageType=='decisions'}" (click)="setMessageType('decisions')">
+                  <i class="icomoon icon-decision" aria-hidden="true"></i>
+                  <span>Decisions</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" [ngClass]="{'active':messageType=='argument'}" (click)="setMessageType('argument')">
+                  <i class="icomoon icon-argument" aria-hidden="true"></i>
+                  <span>Argument</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" [ngClass]="{'active':messageType=='decision_poll'}" (click)="setMessageType('decision_poll')">
+                  <i class="icomoon icon-poll" aria-hidden="true"></i>
+                  <span>Poll</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" [ngClass]="{'active':messageType=='assumption'}" (click)="setMessageType('assumption')">
+                  <i class="icomoon icon-assumption" aria-hidden="true"></i>
+                  <span>Assumption</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" [ngClass]="{'active':messageType=='thought_experiment'}" (click)="setMessageType('thought_experiment')">
+                  <i class="icomoon icon-thought" aria-hidden="true"></i>
+                  <span>Thought Experiment</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" [ngClass]="{'active':messageType=='hypothesis'}" (click)="setMessageType('hypothesis')">
+                  <i class="icomoon icon-hypothesis" aria-hidden="true"></i>
+                  <span>Hypothesis</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" [ngClass]="{'active':messageType=='gut_feeling'}" (click)="setMessageType('gut_feeling')">
+                  <i class="icomoon icon-gut" aria-hidden="true"></i>
+                  <span>Gut Feeling</span>
+                </a>
+              </li>
+            </ul>
+
+            <!-- <button type="button" (click)="setMessageType('task')">Task</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>

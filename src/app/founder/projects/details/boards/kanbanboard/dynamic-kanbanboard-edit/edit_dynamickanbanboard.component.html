@@ -1,0 +1,11 @@
+<jqxKanban *ngIf="columns.length"
+           #myKanbanboard
+           (onItemMoved)="myKanbanboardOnItemMoved($event)"
+           [height]="600"
+           [template]="template"
+           [source]="dataAdapter"
+           [columns]="columns"
+           [resources]="resourcesAdapterFunc()"
+           [itemRenderer]="itemRenderer"
+           [columnRenderer]="columnRenderer"
+></jqxKanban>

@@ -1,0 +1,20 @@
+<main>
+  <app-header></app-header>
+  <div class="container saf_blue_theme">
+      <div class="heading">
+          <h1>Notification</h1>
+      </div>
+      <div class="cardwrap">
+   
+        <div class="card"  *ngFor="let notification of notifications; let i = index" (click)="goTo(notification)">          
+            <span class="notification_icon"><span class="icon-notifications"></span></span>
+            <span class="notification" [title]="notification.title">{{notification.title}}</span>
+            <span class="timestamp">{{notification.read_date | formatRelativeTime}}</span>         
+        </div>
+
+      </div>
+      <div class="projects-footer">
+          <div class="back-button" (click)="_location.back()">Back</div>
+      </div>
+  </div>
+</main>

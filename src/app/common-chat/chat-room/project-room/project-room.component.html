@@ -1,0 +1,26 @@
+<div class="chatroomname">{{groupName}}</div>
+    <div class="chat-message" #chatmessagesHgt>     
+      <perfect-scrollbar>
+        <div class="scrollingcontent">
+          <div class="message" *ngFor="let message of chatMessageInfoList" [ngClass]="{'currentuser':message.flag}">
+            <span class="user-photo" *ngIf="message.user">
+              <img *ngIf="message.user.photo_crop" [src]="message.user.photo_crop" alt="">
+            </span>
+            <div class="user" *ngIf="message.user">
+              <span class="user-name" [attr.title]="getUsername(message.user)">
+                <span class="username">{{getUsername(message.user)}}</span>
+              </span>
+              <span class="message-time">{{message.time | date:'shortTime'}}</span>
+            </div>
+            <div class="message-body" [innerHTML]="message.text"></div>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+    <div class="chatbottomoptions" #chatbottomoptions>
+      <!-- <div class="new-message-help-text">Ctrl / Command + Enter to send a message</div> -->
+      <div class="new-message">
+        <textarea placeholder="Type your message here" (keydown)="onTextInputKeyPress($event)" [(ngModel)]="messageText"></textarea>
+        <div class="btn send-btn" (click)="sendMessage()"></div>
+      </div>
+    </div>

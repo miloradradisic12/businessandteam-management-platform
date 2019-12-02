@@ -1,0 +1,26 @@
+<div class="document-item-container">
+  <div class="document-item {{document.type}}" (click)="open.emit()">
+  </div>
+  <div class="document-item-footer">
+    <input *ngIf="mode === 'renaming'" class="form-control" type="text" [(ngModel)]="name" />
+    <div class="document-title"
+         *ngIf="mode !== 'renaming'" (click)="open.emit()"
+         [attr.title]="document.title">{{document.title}}</div>
+    <div *ngIf="mode === 'normal'" ngbDropdown #documentMenu="ngbDropdown">
+      <div ngbDropdownToggle class="action document-menu-btn"><i class="fa fa-ellipsis-h"></i></div>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="dropdown-item" (click)="renameDocument()">Rename</button>
+          <button class="dropdown-item" (click)="deleteDocument()">Delete</button>
+        </div>
+    </div>
+    <div *ngIf="mode === 'renaming'"
+         class="action apply-renaming-btn"
+         (click)="applyRenaming()"><i class="fa fa-check"></i></div>
+    <div *ngIf="mode === 'deleting'" class="delete-actions">
+      <div class="action apply-deleting-btn"
+           (click)="applyDeleting()"><i class="fa fa-trash"></i></div>
+      <div class="action cancel-deleting-btn"
+           (click)="cancelDeleting()"><i class="fa fa-close"></i></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="documents-list-scroll">
+  <div class="documents-list">
+    <div class="item" *ngFor="let item of items">
+      <app-document-item *ngIf="!item.isFolder"
+                         class="file"
+                         [document]="item"
+                         (open)="open.emit(item)"
+                         (rename)="renameDocument.emit({item: item, name: $event})"
+                         (del)="deleteDocument.emit(item)"></app-document-item>
+      <app-folder-item *ngIf="item.isFolder"
+                       class="folder"
+                       [folder]="item"
+                       (click)="open.emit(item)"></app-folder-item>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-toolbar">
+  <div ngbDropdown #createDocumentMenu="ngbDropdown" class="create-document">
+    <div class="create-document-toggle" ngbDropdownToggle>+</div>
+    <div class="dropdown-menu" ngbDropdownMenu>
+      <button class="dropdown-item text" (click)="createDocument.emit('presentation')"></button>
+      <button class="dropdown-item text" (click)="createDocument.emit('ocr')"></button>
+      <button class="dropdown-item diagram" (click)="createDocument.emit('diagram')"></button>
+      <button class="dropdown-item drawing" (click)="createDocument.emit('drawing')"></button>
+      <button class="dropdown-item spreadsheet" (click)="createDocument.emit('spreadsheet')"></button>
+      <button class="dropdown-item text" (click)="createDocument.emit('document')"></button>
+    </div>
+  </div>
+</div>

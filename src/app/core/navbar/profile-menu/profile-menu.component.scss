@@ -1,0 +1,161 @@
+.profile-menu-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  padding: 0px;
+  &:after {
+    display: none;
+  }
+}
+.profile-icon {
+  display: inline-block;
+  vertical-align: middle;
+  height: 2.000em;
+  width: 2.000em;
+  min-width: 2em;
+  border-radius: 50%;
+  background: #ccc url(/assets/img/navbar-noavatar-icon.png) no-repeat center;
+  margin: 0.125em 0.250em 0.250em;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
+}
+.btn { font-size: 1.125em; }
+.profile-caption {
+  padding: 0.250em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.toggle-icon {
+  color: #dddddd;
+  padding: 0.250em;
+  margin-left: 0.938em;
+}
+
+.profile-name {
+  color: #f5f5f5;
+  font-weight: 600;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 7.188em;
+}
+
+.profile-role {
+  color: #cccccc;
+  font-size: 0.750em;
+  text-align: left;
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+  border-radius: 0;
+  left: auto;
+  right: 0;
+  padding: 0;
+  width: 12.500em;
+  font-size: 100%;
+
+  .separator {
+    border: 1px solid #a1a0f2;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin:0 auto;
+  }
+}
+
+.dropdown-item.profile-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 3.563em;
+  cursor: pointer;
+  padding: 0.313em 0.625em;
+
+}
+
+.profile-item-icon {
+  height: 2.438em;
+  width: 2.438em;
+  margin: 0.250em;
+}
+
+.profile-item-caption {
+  padding: 0.250em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-item-name {
+  color: #4230e6;
+  font-size: 1.125em;
+  font-weight: 600;
+  text-align: left;
+  overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.profile-item-subtitle {
+  color: #fe6f6b;
+  font-size: 0.875em;
+  text-align: left;
+}
+
+.dropdown-item {
+  color: #5554e8;
+  font-size: 1.125em;
+  font-weight: 600;
+
+  height: 2.438em;
+  padding: 0.313em 1.250em;
+  cursor: pointer;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.menu-icon {
+  font-size: 0.833em;
+  margin-right: 1em;
+
+  &.employee {
+    color: #679BF9;
+  }
+
+  &.creator {
+    color: #FF6C24;
+  }
+
+  &.backer {
+    color: #00D8C9;
+  }
+}
+
+.fa-check {
+  float: right;
+  line-height: 1.611em;
+  vertical-align: middle;
+}
+
+.d-inline-block.dropdown { vertical-align: middle;min-height: 3.125em;}
+
+
+@media (max-width: 767px) {
+  .toggle-icon{
+    margin: 0;
+  }
+}
+@media (max-width: 480px) {
+
+
+
+}

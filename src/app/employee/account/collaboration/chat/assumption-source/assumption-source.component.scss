@@ -1,0 +1,39 @@
+.new-message {
+    display: flex;
+    height: 56px;
+    //border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;   
+
+    textarea {
+      color: #3D3C40;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      padding: 10px 20px;
+      resize: none;
+      font-size: 18px;
+      line-height: 31px;
+
+      &::placeholder {
+        color: #999999;
+      }
+    }
+
+    .send-btn {
+      height: 100%;
+      width: 45px;
+      min-width: 45px;
+      background-image: url('/assets/img/collaboration/send.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      border-left: 1px solid #cccccc;
+    }
+  }
+
+label {
+  //border-top: 1px solid #ccc;
+  color: #333333;
+  font-size: 14px;
+  line-height: 31px;
+  margin: 6px 24px;
+}
