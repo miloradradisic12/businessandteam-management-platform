@@ -61,7 +61,7 @@
     "jszip": "^2.6.1",
     "lodash": "^4.17.4",
     "mammoth": "^1.4.2",
-    "moment": "^2.18.1",
+    "moment": "^2.29.2",
     "morgan": "^1.8.1",
     "ng-circle-progress": "^1.0.0",
     "ng2-datetime-picker": "^0.15.1",
