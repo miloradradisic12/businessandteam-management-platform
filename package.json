@@ -39,7 +39,7 @@
     "angular2-jwt": "^0.2.3",
     "angular2-text-mask": "^8.0.3",
     "angularfire2": "^5.0.0-rc.2",
-    "async": "^2.4.1",
+    "async": "^2.6.4",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "bootstrap": "^4.0.0-alpha.6",
